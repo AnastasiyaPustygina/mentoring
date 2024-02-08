@@ -1,0 +1,50 @@
+databaseChangeLog:
+  - changeSet:
+      id: 2023-02-01--0005-comment
+      author: apustygina
+      preConditions:
+        not:
+          tableExists:
+            tableName: comment
+      createTable:
+        tableName: comment
+        columns:
+          - column:
+              name: id
+              type: bigint
+              autoIncrement: true
+              constraints:
+                nullable: false
+                primaryKey: true
+                primaryKeyName: pk_comment
+          - column:
+              name: rating
+              type: double(1)
+              constraints:
+                nullable: false
+          - column:
+              name: text
+              type: varchar(2000)
+              constraints:
+                nullable: false
+          - column:
+              name: date
+              type: varchar(32)
+              constraints:
+                nullable: false
+          - column:
+              name: client_id
+              type: bigint
+              constraints:
+                nullable: false
+                foreignKeyName: fk_comment_client
+                references: client(id)
+                deleteCascade: true
+          - column:
+              name: tutor_id
+              type: bigint
+              constraints:
+                nullable: false
+                foreignKeyName: fk_comment_tutor
+                references: tutor(id)
+                deleteCascade: true

@@ -1,0 +1,64 @@
+databaseChangeLog:
+  - changeSet:
+      id: 2023-02-01--0006-deal
+      author: apustygina
+      preConditions:
+        not:
+          tableExists:
+            tableName: deal
+      sql: CREATE TYPE deal_status AS ENUM ('APPLICATION', 'PROCESSING', 'CONFIRMATION', 'RETURN_CLIENT', 'SENT_TUTOR', 'CONFLICT');
+      createTable:
+        tableName: deal
+        columns:
+          - column:
+              name: id
+              type: bigint
+              autoIncrement: true
+              constraints:
+                nullable: false
+                primaryKey: true
+                primaryKeyName: pk_deal
+          - column:
+              name: cost
+              type: int
+              constraints:
+                nullable: false
+          - column:
+              name: conditional
+              type: varchar(5000)
+              constraints:
+                nullable: false
+          - column:
+              name: date
+              type: varchar(32)
+              constraints:
+                nullable: false
+          - column:
+              name: status
+              type: deal_status
+              constraints:
+                nullable: false
+          - column:
+              name: client_id
+              type: bigint
+              constraints:
+                nullable: false
+                foreignKeyName: fk_deal_client
+                references: client(id)
+                deleteCascade: false
+          - column:
+              name: tutor_id
+              type: bigint
+              constraints:
+                nullable: false
+                foreignKeyName: fk_deal_tutor
+                references: tutor(id)
+                deleteCascade: false
+          - column:
+              name: guarantee_id
+              type: bigint
+              constraints:
+                nullable: false
+                foreignKeyName: fk_deal_guarantee
+                references: guarantee(id)
+                deleteCascade: false

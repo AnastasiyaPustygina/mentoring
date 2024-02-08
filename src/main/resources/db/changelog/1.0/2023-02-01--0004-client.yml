@@ -1,0 +1,60 @@
+databaseChangeLog:
+  - changeSet:
+      id: 2023-02-01--0004-client
+      author: apustygina
+      preConditions:
+        not:
+          tableExists:
+            tableName: client
+      createTable:
+        tableName: client
+        columns:
+          - column:
+              name: id
+              type: bigint
+              autoIncrement: true
+              constraints:
+                nullable: false
+                primaryKey: true
+                primaryKeyName: pk_client
+          - column:
+              name: name
+              type: varchar(64)
+              constraints:
+                nullable: false
+          - column:
+              name: surname
+              type: varchar(64)
+              constraints:
+                nullable: false
+          - column:
+              name: course
+              type: varchar(32)
+              constraints:
+                nullable: false
+          - column:
+              name: faculty
+              type: varchar(64)
+              constraints:
+                nullable: false
+          - column:
+              name: direction
+              type: varchar(64)
+              constraints:
+                nullable: false
+          - column:
+              name: email
+              type: varchar(128)
+              constraints:
+                nullable: false
+                unique: true
+          - column:
+            name: password
+            type: varchar(128)
+            constraints:
+              nullable: false
+          - column:
+            name: client_info
+            type: varchar(2000)
+            constraints:
+              nullable: false

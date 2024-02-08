@@ -1,0 +1,29 @@
+databaseChangeLog:
+  - changeSet:
+      id: 2023-02-01--0010-guarantee-chat
+      author: apustygina
+      preConditions:
+        not:
+          tableExists:
+            tableName: guarantee-chat
+      createTable:
+        tableName: guarantee-chat
+        columns:
+          - column:
+              name: id
+              type: bigint
+              autoIncrement: true
+              constraints:
+                nullable: false
+                primaryKey: true
+                primaryKeyName: pk_guarantee-chat
+          - column:
+              name: name
+              type: varchar(64)
+              constraints:
+                nullable: false
+          - column:
+              name: status
+              type: activity_status
+              constraints:
+                nullable: false

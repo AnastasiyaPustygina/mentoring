@@ -1,0 +1,30 @@
+databaseChangeLog:
+  - changeSet:
+      id: 2023-02-01--0009-forum
+      author: apustygina
+      preConditions:
+        not:
+          tableExists:
+            tableName: forum
+      sql: CREATE TYPE activity_status AS ENUM ('ACTIVE', 'ABANDONED', 'AVERAGE');
+      createTable:
+        tableName: forum
+        columns:
+          - column:
+              name: id
+              type: bigint
+              autoIncrement: true
+              constraints:
+                nullable: false
+                primaryKey: true
+                primaryKeyName: pk_forum
+          - column:
+              name: name
+              type: varchar(64)
+              constraints:
+                nullable: false
+          - column:
+              name: status
+              type: activity_status
+              constraints:
+                nullable: false

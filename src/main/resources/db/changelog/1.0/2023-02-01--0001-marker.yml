@@ -1,0 +1,25 @@
+databaseChangeLog:
+  - changeSet:
+      id: 2023-02-01--0001-marker
+      author: apustygina
+      preConditions:
+        not:
+          tableExists:
+            tableName: marker
+      createTable:
+        tableName: marker
+        columns:
+          - column:
+              name: id
+              type: bigint
+              autoIncrement: true
+              constraints:
+                nullable: false
+                primaryKey: true
+                primaryKeyName: pk_marker
+          - column:
+              name: title
+              type: varchar(200)
+              constraints:
+                nullable: false
+                unique: true
